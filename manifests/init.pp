@@ -30,7 +30,7 @@ class freebsd_repo (
 
   exec {'pkg_update' :
     path        => ['/usr/local/sbin','/sbin/','/usr/sbin','/usr/bin'],
-    command     => "pkg update",
+    command     => 'pkg update',
   #  refreshonly => true,
   }
 
