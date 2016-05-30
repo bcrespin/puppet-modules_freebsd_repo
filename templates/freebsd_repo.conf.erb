@@ -1,0 +1,14 @@
+# puppet file managed by puppet
+<% @repo_name %> : {
+  url : "<% @repo_url -%>
+  mirror_type: "<% @repo_type -%>
+  signature_type: "<% @repo_sign_type -%>"
+<% if @repo_type.UPPERCASE != 'NONE' -%>
+  <% @repo_sign_type.lowercase -%>: "<% @repo_sign_path -%>
+<% end -%>
+<% if @repo_enabled == true %>
+  enabled: yes 
+<% else -%>
+  enabled: no
+<% end -%>
+
