@@ -21,7 +21,7 @@ class freebsd_repo (
 
   $pkg_repo_path = '/usr/local/etc/pkg/repos'
 
-  exec { "${pkg_repo_path}" :
+  exec { 'pkg_repo_path' :
     path    => ['/sbin/','/bin/','/usr/sbin','/usr/bin'],
     command => "mkdir -p ${pkg_repo_path}",
     unless  => "test -d ${pkg_repo_path}",
@@ -31,7 +31,7 @@ class freebsd_repo (
   exec {'pkg_update' :
     path        => ['/usr/local/sbin','/sbin/','/usr/sbin','/usr/bin'],
     command     => 'pkg update',
-  #  refreshonly => true,
+    refreshonly => true,
   }
 
   if ($disable_default_repo)
@@ -42,7 +42,7 @@ class freebsd_repo (
       group   => 'wheel',
       mode    => '0644',
       content => "FreeBSD : { enabled: NO }\n",
-      require => Exec [ "${pkg_repo_path}"],
+      require => Exec ['pkg_repo_path'],
       notify  => Exec ['pkg_update'],
     }
   }
@@ -82,7 +82,7 @@ class freebsd_repo (
       group   => 'wheel',
       mode    => '0644',
       content => template($repo_template),
-      require => Exec [ "${pkg_repo_path}"],
+      require => Exec ['pkg_repo_path'],
       notify  => Exec ['pkg_update'],
     }
   }
