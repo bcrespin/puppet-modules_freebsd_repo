@@ -1,6 +1,6 @@
 #
 class freebsd_repo::params {
-  $disable_default_repo   = false
+  $disable_default_repo   = true
   $repo_url               = "pkg+http://pkg.FreeBSD.org/\${ABI}/latest"
   $repo_type              = 'SRV'
   $repo_sign_type         = 'FINGERPRINTS'
